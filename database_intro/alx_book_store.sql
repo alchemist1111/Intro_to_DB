@@ -4,44 +4,44 @@ CREATE DATABASE IF NOT EXISTS alx_book_store;
 -- Use the newly created database
 USE alx_book_store;
 
--- Create the books table
-CREATE TABLE BOOKS (
-    BOOK_ID INT AUTO_INCREMENT PRIMARY KEY,
-    TITLE VARCHAR(130) NOT NULL,
-    AUTHOR_ID INT,
-    PRICE DOUBLE,
-    PUBLICATION_DATE DATE,
-    FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHORS(AUTHOR_ID)
+-- Create the Authors table
+CREATE TABLE Authors (COMMENT
+     author_id INT AUTO_INCREMENT PRIMARY KEY,
+     author_name VARCHAR(215) NOT NULL,
 );
 
--- Create the authors table
-CREATE TABLE AUTHORS (
-    AUTHOR_ID INT AUTO_INCREMENT PRIMARY KEY,
-    AUTHOR_NAME VARCHAR(215) NOT NULL
+-- Create the Books table
+CREATE TABLE Books (COMMENT
+     book_id INT AUTOINCREMENT PRIMARY KEY,
+     title VARCHAR(130),
+     author_id INT,
+     price DOUBLE,
+     publication_date DATE,
+     FOREIGN KEY (author_id) REFERENCES Authors(author_id)
 );
 
--- Create the customers table
-CREATE TABLE CUSTOMERS (
-    CUSTOMER_ID INT AUTO_INCREMENT PRIMARY KEY,
-    CUSTOMER_NAME VARCHAR(215) NOT NULL,
-    EMAIL VARCHAR(215),
-    ADDRESS TEXT
+-- Create the Customers table
+CREATE TABLE Customers (COMMENT
+      customer_id INT AUTOINCREMENT PRIMARY KEY,
+      customer_name VARCHAR(215),
+      email VARCHAR(215),
+      address TEXT
 );
 
--- Create the orders table
-CREATE TABLE ORDERS (
-    ORDER_ID INT AUTO_INCREMENT PRIMARY KEY,
-    CUSTOMER_ID INT,
-    ORDER_DATE DATE,
-    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID)
+-- Create the Orders table
+CREATE TABLE Orders (COMMENT
+      order_id INT AUTOINCREMENT PRIMARY KEY,
+      customer_id INT,
+      order_date DATE,
+      FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
--- Create the order_details table
-CREATE TABLE ORDER_DETAILS (
-    ORDERDETAILID INT AUTO_INCREMENT PRIMARY KEY,
-    ORDER_ID INT,
-    BOOK_ID INT,
-    QUANTITY DOUBLE,
-    FOREIGN KEY (ORDER_ID) REFERENCES ORDERS(ORDER_ID),
-    FOREIGN KEY (BOOK_ID) REFERENCES BOOKS(BOOK_ID)
+-- Create the Order_details table
+CREATE TABLE Order_Details (COMMENT
+      orderdetailid INT AUTOINCREMENT PRIMARY KEY,
+      order_id INT,
+      book_id INT,
+      quantity DOUBLE,
+      FOREIGN KEY (order_id) REFERENCES Orders(order_id),
+      FOREIGN KEY (book_id) REFERENCES Books(book_id)
 );
